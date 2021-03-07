@@ -2,6 +2,7 @@ package com.spring.dynamodb.sass.controllers;
 
 import com.spring.dynamodb.sass.entities.User;
 import com.spring.dynamodb.sass.repositories.UserRepository;
+import com.spring.dynamodb.sass.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,19 +17,17 @@ import java.util.List;
 public class UserController {
 
 	@Autowired
-	UserRepository userRepository;
+	UserService userService;
 
 	@GetMapping
 	public ResponseEntity<List<User>> getAll() {
-		List<User> users = (List<User>) userRepository.findAll();
+		List<User> users = userService.getAll();
 		return ResponseEntity.ok(users);
 	}
 
 	@PostMapping
 	public ResponseEntity<User> addOne() {
-		User user = new User();
-		user.setUsername("user1");
-		User savedUser = userRepository.save(user);
+		User savedUser = userService.addOne();
 		return ResponseEntity.ok(savedUser);
 	}
 }
