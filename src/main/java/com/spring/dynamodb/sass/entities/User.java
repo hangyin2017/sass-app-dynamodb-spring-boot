@@ -19,4 +19,10 @@ public class User {
 
 	@DynamoDBAttribute(attributeName = "userName")
 	private String username;
+
+	@DynamoDBAttribute(attributeName = "email")
+	private String email;
+
+	@DynamoDBAttribute(attributeName = "verified")
+	private Boolean isVerified;
 }

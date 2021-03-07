@@ -1,14 +1,13 @@
 package com.spring.dynamodb.sass.controllers;
 
+import com.spring.dynamodb.sass.dtos.user.UserGetDto;
+import com.spring.dynamodb.sass.dtos.user.UserPostDto;
 import com.spring.dynamodb.sass.entities.User;
 import com.spring.dynamodb.sass.repositories.UserRepository;
 import com.spring.dynamodb.sass.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,14 +19,14 @@ public class UserController {
 	UserService userService;
 
 	@GetMapping
-	public ResponseEntity<List<User>> getAll() {
-		List<User> users = userService.getAll();
+	public ResponseEntity<List<UserGetDto>> getAll() {
+		List<UserGetDto> users = userService.getAll();
 		return ResponseEntity.ok(users);
 	}
 
 	@PostMapping
-	public ResponseEntity<User> addOne() {
-		User savedUser = userService.addOne();
+	public ResponseEntity<UserGetDto> addOne(@RequestBody UserPostDto userPostDto) {
+		UserGetDto savedUser = userService.addOne(userPostDto);
 		return ResponseEntity.ok(savedUser);
 	}
 }
