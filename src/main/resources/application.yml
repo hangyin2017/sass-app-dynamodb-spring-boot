@@ -1,0 +1,15 @@
+spring:
+    profiles:
+        active: dev
+    data:
+        dynamodb:
+            entity2ddl:
+                auto: create-only
+                gsiProjectionType: ALL
+
+aws:
+    dynamodb:
+        region: ap-southeast-2
+        endpoint: https://dynamodb.ap-southeast-2.amazonaws.com
+        accesskey:
+        secretkey:
