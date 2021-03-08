@@ -2,8 +2,6 @@ package com.spring.dynamodb.sass.controllers;
 
 import com.spring.dynamodb.sass.dtos.user.UserGetDto;
 import com.spring.dynamodb.sass.dtos.user.UserPostDto;
-import com.spring.dynamodb.sass.entities.User;
-import com.spring.dynamodb.sass.repositories.UserRepository;
 import com.spring.dynamodb.sass.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

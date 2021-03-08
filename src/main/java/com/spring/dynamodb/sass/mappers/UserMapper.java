@@ -2,7 +2,7 @@ package com.spring.dynamodb.sass.mappers;
 
 import com.spring.dynamodb.sass.dtos.user.UserGetDto;
 import com.spring.dynamodb.sass.dtos.user.UserPostDto;
-import com.spring.dynamodb.sass.entities.User;
+import com.spring.dynamodb.sass.entities.User.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;

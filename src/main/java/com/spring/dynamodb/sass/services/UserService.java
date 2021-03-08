@@ -2,7 +2,7 @@ package com.spring.dynamodb.sass.services;
 
 import com.spring.dynamodb.sass.dtos.user.UserGetDto;
 import com.spring.dynamodb.sass.dtos.user.UserPostDto;
-import com.spring.dynamodb.sass.entities.User;
+import com.spring.dynamodb.sass.entities.User.User;
 import com.spring.dynamodb.sass.mappers.UserMapper;
 import com.spring.dynamodb.sass.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
