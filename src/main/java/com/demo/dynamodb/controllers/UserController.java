@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class UserController {
 	}
 
 	@PostMapping
-	public UserGetDto addOne(@RequestBody UserPostDto userPostDto) {
+	public UserGetDto addOne(@RequestBody @Valid UserPostDto userPostDto) {
 		UserGetDto savedUser = userService.addOne(userPostDto);
 		return savedUser;
 	}

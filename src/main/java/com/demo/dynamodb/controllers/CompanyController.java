@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class CompanyController {
 	}
 
 	@PostMapping
-	public CompanyGetDto addOne(@RequestBody CompanyPostDto companyPostDto) {
+	public CompanyGetDto addOne(@RequestBody @Valid CompanyPostDto companyPostDto) {
 		CompanyGetDto savedCompany = companyService.addOne(companyPostDto);
 		return savedCompany;
 	}
