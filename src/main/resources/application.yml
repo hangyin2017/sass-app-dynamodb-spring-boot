@@ -11,5 +11,5 @@ aws:
     dynamodb:
         region: ap-southeast-2
         endpoint: https://dynamodb.ap-southeast-2.amazonaws.com
-        accesskey:
-        secretkey:
+        accesskey: fakeKey
+        secretkey: fakeKey2

@@ -4,9 +4,9 @@ plugins {
 	id 'java'
 }
 
-group = 'com.spring.dynamodb'
+group = 'com.demo.dynamodb'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '15'
 
 configurations {
 	compileOnly {
