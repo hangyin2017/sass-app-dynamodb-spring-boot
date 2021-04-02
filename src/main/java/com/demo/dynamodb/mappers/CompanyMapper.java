@@ -1,7 +1,7 @@
 package com.demo.dynamodb.mappers;
 
 import com.demo.dynamodb.dtos.company.CompanyGetDto;
-import com.demo.dynamodb.entities.Company.Company;
+import com.demo.dynamodb.entities.company.Company;
 import com.demo.dynamodb.dtos.company.CompanyPostDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

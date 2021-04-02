@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableDynamoDBRepositories(basePackages = "com.spring.dynamodb.sass.repositories")
+@EnableDynamoDBRepositories(basePackages = "com.demo.dynamodb.repositories")
 public class DynamoDBConfig {
 
 	@Value("${aws.dynamodb.region}")

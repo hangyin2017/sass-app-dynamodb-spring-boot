@@ -3,7 +3,7 @@ package com.demo.dynamodb.services;
 import com.demo.dynamodb.constants.Role;
 import com.demo.dynamodb.dtos.user.UserGetDto;
 import com.demo.dynamodb.dtos.user.UserPostDto;
-import com.demo.dynamodb.entities.User.User;
+import com.demo.dynamodb.entities.user.User;
 import com.demo.dynamodb.mappers.UserMapper;
 import com.demo.dynamodb.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
