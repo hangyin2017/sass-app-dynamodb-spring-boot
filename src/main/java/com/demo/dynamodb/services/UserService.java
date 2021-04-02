@@ -1,5 +1,6 @@
 package com.demo.dynamodb.services;
 
+import com.demo.dynamodb.constants.Role;
 import com.demo.dynamodb.dtos.user.UserGetDto;
 import com.demo.dynamodb.dtos.user.UserPostDto;
 import com.demo.dynamodb.entities.User.User;
@@ -30,6 +31,8 @@ public class UserService {
 	public UserGetDto addOne(UserPostDto userPostDto) {
 		User user = userMapper.toEntity(userPostDto);
 		user.setIsVerified(false);
+		user.setRole(Role.USER.toString());
+
 		User savedUser = userRepository.save(user);
 		return userMapper.fromEntity(savedUser);
 	}

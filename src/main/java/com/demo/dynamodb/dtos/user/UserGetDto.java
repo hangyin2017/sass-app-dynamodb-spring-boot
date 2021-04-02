@@ -9,4 +9,6 @@ public class UserGetDto {
 	String username;
 	String email;
 	Boolean isVerified;
+	String role;
+	String companyId;
 }

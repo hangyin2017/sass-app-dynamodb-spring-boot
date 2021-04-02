@@ -24,6 +24,9 @@ public class User {
 	@DynamoDBAttribute(attributeName = "verified")
 	private Boolean isVerified;
 
+	@DynamoDBAttribute(attributeName = "role")
+	private String role;
+
 	@DynamoDBAttribute(attributeName = "companyId")
 	private String companyId;
 }
