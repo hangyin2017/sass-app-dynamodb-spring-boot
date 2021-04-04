@@ -4,8 +4,6 @@ import com.demo.dynamodb.dtos.company.CompanyGetDto;
 import com.demo.dynamodb.dtos.company.CompanyPostDto;
 import com.demo.dynamodb.services.CompanyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,8 +17,8 @@ public class CompanyController {
 	private final CompanyService companyService;
 
 	@GetMapping
-	public List<CompanyGetDto> getAll() {
-		List<CompanyGetDto> companyList = companyService.getAll();
+	public List<CompanyGetDto> list() {
+		List<CompanyGetDto> companyList = companyService.list();
 		return companyList;
 	}
 

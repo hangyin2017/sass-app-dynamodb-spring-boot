@@ -19,7 +19,7 @@ public class CompanyService {
 
 	private final CompanyMapper companyMapper;
 
-	public List<CompanyGetDto> getAll() {
+	public List<CompanyGetDto> list() {
 		List<Company> companys = companyRepository.findAll();
 		List<CompanyGetDto> companyGetDtos = companys.stream()
 				.map(companyMapper::fromEntity)
