@@ -6,10 +6,13 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverterFactory;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 @EnableDynamoDBRepositories(basePackages = "com.demo.dynamodb.repositories")
@@ -26,6 +29,9 @@ public class DynamoDBConfig {
 
 	@Value("${aws.dynamodb.secretkey}")
 	private String awsSecretKey;
+
+	@Value("${spring.profiles.active}")
+	private String env;
 
 	/**
 	 * Instantiates Amazon DynamoDB.
@@ -55,5 +61,24 @@ public class DynamoDBConfig {
 	 */
 	public AwsClientBuilder.EndpointConfiguration getEndpointConfiguration(String dynamoDBEndpoint, String region) {
 		return new AwsClientBuilder.EndpointConfiguration(dynamoDBEndpoint, region);
+	}
+
+	@Primary
+	@Bean
+	public DynamoDBMapperConfig dynamoDBMapperConfig(DynamoDBMapperConfig.TableNameOverride tableNameOverrider) {
+		// Create empty DynamoDBMapperConfig builder
+		DynamoDBMapperConfig.Builder builder = new DynamoDBMapperConfig.Builder();
+		// Inject missing defaults from the deprecated method
+		builder.withTypeConverterFactory(DynamoDBTypeConverterFactory.standard());
+		builder.withTableNameResolver(DynamoDBMapperConfig.DefaultTableNameResolver.INSTANCE);
+		// Inject the table name overrider bean
+		builder.withTableNameOverride(tableNameOverrider());
+		return builder.build();
+	}
+
+	@Bean
+	public DynamoDBMapperConfig.TableNameOverride tableNameOverrider() {
+		String prefix = "demo_" + env + "_";
+		return DynamoDBMapperConfig.TableNameOverride.withTableNamePrefix(prefix);
 	}
 }
