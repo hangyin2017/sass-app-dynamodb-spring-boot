@@ -8,7 +8,9 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverterFactory;
+import com.demo.dynamodb.utils.EnvUtils;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,8 +32,8 @@ public class DynamoDBConfig {
 	@Value("${aws.dynamodb.secretkey}")
 	private String awsSecretKey;
 
-	@Value("${spring.profiles.active}")
-	private String env;
+	@Autowired
+	private EnvUtils envUtils;
 
 	/**
 	 * Instantiates Amazon DynamoDB.
@@ -78,7 +80,7 @@ public class DynamoDBConfig {
 
 	@Bean
 	public DynamoDBMapperConfig.TableNameOverride tableNameOverrider() {
-		String prefix = "demo_" + env + "_";
+		String prefix = "demo_" + envUtils.getEnv().toString().toLowerCase() + "_";
 		return DynamoDBMapperConfig.TableNameOverride.withTableNamePrefix(prefix);
 	}
 }
