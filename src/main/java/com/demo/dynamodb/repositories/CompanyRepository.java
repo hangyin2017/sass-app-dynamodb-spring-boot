@@ -9,7 +9,9 @@ import java.util.List;
 
 @Repository
 @EnableScan
-public interface CompanyRepository extends CrudRepository<Company, String> {
+public interface CompanyRepository
+		extends CrudRepository<Company, String>,
+				MyCompanyRepository {
 
 	List<Company> findAll();
 }
