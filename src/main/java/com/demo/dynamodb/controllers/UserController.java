@@ -1,5 +1,6 @@
 package com.demo.dynamodb.controllers;
 
+import com.demo.dynamodb.constants.Role;
 import com.demo.dynamodb.dtos.user.UserGetDto;
 import com.demo.dynamodb.dtos.user.UserPostDto;
 import com.demo.dynamodb.services.UserService;
@@ -27,5 +28,17 @@ public class UserController {
 	public UserGetDto addOne(@RequestBody @Valid UserPostDto userPostDto) {
 		UserGetDto savedUser = userService.addOne(userPostDto);
 		return savedUser;
+	}
+
+	@GetMapping("/companyId")
+	public List<UserGetDto> findByCompanyId(@RequestParam String companyId) {
+		List<UserGetDto> users = userService.findByCompanyId(companyId);
+		return users;
+	}
+
+	@GetMapping("/role")
+	public List<UserGetDto> findByRole(@RequestParam Role role) {
+		List<UserGetDto> users = userService.findByRole(role);
+		return users;
 	}
 }

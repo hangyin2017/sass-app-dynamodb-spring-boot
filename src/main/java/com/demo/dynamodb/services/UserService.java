@@ -31,9 +31,18 @@ public class UserService {
 	public UserGetDto addOne(UserPostDto userPostDto) {
 		User user = userMapper.toEntity(userPostDto);
 		user.setIsVerified(false);
-		//user.setRole(userPostDto.getRole().toString());
 
 		User savedUser = userRepository.save(user);
 		return userMapper.fromEntity(savedUser);
+	}
+
+	public List<UserGetDto> findByRole(Role role) {
+		List<User> users = userRepository.findByRole(role);
+		return users.stream().map(userMapper::fromEntity).collect(Collectors.toList());
+	}
+
+	public List<UserGetDto> findByCompanyId(String companyId) {
+		List<User> users = userRepository.findByCompanyId(companyId);
+		return users.stream().map(userMapper::fromEntity).collect(Collectors.toList());
 	}
 }

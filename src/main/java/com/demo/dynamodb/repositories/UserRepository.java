@@ -1,5 +1,6 @@
 package com.demo.dynamodb.repositories;
 
+import com.demo.dynamodb.constants.Role;
 import com.demo.dynamodb.entities.user.User;
 import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.data.repository.CrudRepository;
@@ -9,9 +10,11 @@ import java.util.List;
 
 @Repository
 @EnableScan
-public interface UserRepository extends CrudRepository<User, String> {
+public interface UserRepository
+		extends CrudRepository<User, String>,
+				MyUserRepository {
 
 	List<User> findAll();
 
-	List<User> findByRole();
+	List<User> findByRole(Role role);
 }
