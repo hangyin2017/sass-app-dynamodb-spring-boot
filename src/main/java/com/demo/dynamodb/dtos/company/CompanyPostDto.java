@@ -1,6 +1,7 @@
 package com.demo.dynamodb.dtos.company;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,7 +14,10 @@ public class CompanyPostDto {
 	private String address;
 	private String country;
 	private String city;
+
+	@URL
 	private String url;
+
 	private String introduction;
 	private String businessNumber;
 }
