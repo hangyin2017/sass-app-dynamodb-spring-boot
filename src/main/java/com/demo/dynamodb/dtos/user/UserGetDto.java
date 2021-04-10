@@ -1,6 +1,9 @@
 package com.demo.dynamodb.dtos.user;
 
+import com.demo.dynamodb.constants.Role;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class UserGetDto {
@@ -9,6 +12,6 @@ public class UserGetDto {
 	String username;
 	String email;
 	Boolean isVerified;
-	String role;
+	List<Role> role;
 	String companyId;
 }

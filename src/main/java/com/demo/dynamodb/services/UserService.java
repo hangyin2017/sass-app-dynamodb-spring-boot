@@ -31,7 +31,7 @@ public class UserService {
 	public UserGetDto addOne(UserPostDto userPostDto) {
 		User user = userMapper.toEntity(userPostDto);
 		user.setIsVerified(false);
-		user.setRole(userPostDto.getRole().toString());
+		//user.setRole(userPostDto.getRole().toString());
 
 		User savedUser = userRepository.save(user);
 		return userMapper.fromEntity(savedUser);
