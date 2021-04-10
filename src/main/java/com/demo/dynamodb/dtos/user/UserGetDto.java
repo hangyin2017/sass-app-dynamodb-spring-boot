@@ -12,6 +12,6 @@ public class UserGetDto {
 	String username;
 	String email;
 	Boolean isVerified;
-	List<Role> role;
+	List<String> role;
 	String companyId;
 }

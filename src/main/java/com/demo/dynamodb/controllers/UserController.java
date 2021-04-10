@@ -24,6 +24,7 @@ public class UserController {
 		return userList;
 	}
 
+	// Note: Role is lower-case
 	@PostMapping
 	public UserGetDto addOne(@RequestBody @Valid UserPostDto userPostDto) {
 		UserGetDto savedUser = userService.addOne(userPostDto);
@@ -36,9 +37,10 @@ public class UserController {
 		return users;
 	}
 
+	// Example: api/v1/users/role?role=intern
 	@GetMapping("/role")
-	public List<UserGetDto> findByRole(@RequestParam Role role) {
-		List<UserGetDto> users = userService.findByRole(role);
+	public List<UserGetDto> findByRole(@RequestParam String role) {
+		List<UserGetDto> users = userService.findByRole(Role.valueOf(role.toUpperCase()));
 		return users;
 	}
 }

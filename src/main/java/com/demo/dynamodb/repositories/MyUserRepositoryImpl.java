@@ -17,7 +17,20 @@ public class MyUserRepositoryImpl implements MyUserRepository {
 
 	@Override
 	public List<User> findByRole(Role role) {
-		return null;
+		HashMap<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+		eav.put(":v1", new AttributeValue().withS(role.toString()));
+
+		// To resolve the conflict with reserved keyword 'role'.
+		HashMap<String, String> ean = new HashMap<String, String>();
+		ean.put("#role", "role");
+
+		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+				.withFilterExpression("contains(#role, :v1)")
+				.withExpressionAttributeValues(eav)
+				.withExpressionAttributeNames(ean);
+
+		List<User> users =  dynamoDBTemplate.scan(User.class, scanExpression);
+		return users;
 	}
 
 	@Override

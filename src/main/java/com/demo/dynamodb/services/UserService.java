@@ -31,6 +31,10 @@ public class UserService {
 	public UserGetDto addOne(UserPostDto userPostDto) {
 		User user = userMapper.toEntity(userPostDto);
 		user.setIsVerified(false);
+		List<Role> roleList = userPostDto.getRole();
+		user.setRole(roleList.stream()
+				.map(Role::toString)
+				.collect(Collectors.toList()));
 
 		User savedUser = userRepository.save(user);
 		return userMapper.fromEntity(savedUser);
