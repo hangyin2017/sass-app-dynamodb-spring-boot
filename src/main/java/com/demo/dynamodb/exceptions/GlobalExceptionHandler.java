@@ -1,17 +1,38 @@
 package com.demo.dynamodb.exceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageConversionException;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.validation.ConstraintViolationException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({IllegalArgumentException.class})
+	@ExceptionHandler({IllegalArgumentException.class,
+			HttpMessageNotReadableException.class,
+			HttpMessageConversionException.class})
 	public String handleBadRequestException(Exception e) {
 		return e.getMessage();
+	}
+
+	// Invoked by failed validation on an method's argument annotated with @valid.
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public String handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+		return e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+	}
+
+	// Invoked by failed validation.
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(ConstraintViolationException.class)
+	public String handleConstraintViolationException(ConstraintViolationException e) {
+		return e.getConstraintViolations().iterator().next().getMessage();
 	}
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
