@@ -6,7 +6,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -27,7 +27,7 @@ public class User {
 	private Boolean isVerified;
 
 	@DynamoDBAttribute(attributeName = "role")
-	private List<String> role;
+	private Set<String> role;
 
 	@DynamoDBAttribute(attributeName = "companyId")
 	private String companyId;

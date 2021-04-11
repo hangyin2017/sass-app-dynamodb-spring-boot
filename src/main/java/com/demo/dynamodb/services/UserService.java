@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,10 +32,10 @@ public class UserService {
 	public UserGetDto addOne(UserPostDto userPostDto) {
 		User user = userMapper.toEntity(userPostDto);
 		user.setIsVerified(false);
-		List<Role> roleList = userPostDto.getRole();
-		user.setRole(roleList.stream()
+		Set<Role> roleSet = userPostDto.getRole();
+		user.setRole(roleSet.stream()
 				.map(Role::toString)
-				.collect(Collectors.toList()));
+				.collect(Collectors.toSet()));
 
 		User savedUser = userRepository.save(user);
 		return userMapper.fromEntity(savedUser);
