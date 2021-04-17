@@ -8,6 +8,7 @@ import com.demo.dynamodb.repositories.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,9 @@ public class CompanyService {
 
 	public CompanyGetDto addOne(CompanyPostDto companyPostDto) {
 		Company company = companyMapper.toEntity(companyPostDto);
+		Date now = new Date();
+		company.setCreatedAt(now);
+		//company.setUpdatedAt(now);
 		Company savedCompany = companyRepository.save(company);
 		return companyMapper.fromEntity(savedCompany);
 	}
