@@ -19,8 +19,8 @@ public class UserController {
 	private final UserService userService;
 
 	@GetMapping
-	public List<UserGetDto> list() {
-		List<UserGetDto> userList = userService.list();
+	public List<UserGetDto> list(@RequestParam Integer page, @RequestParam Integer size) {
+		List<UserGetDto> userList = userService.list(page, size);
 		return userList;
 	}
 

@@ -7,6 +7,8 @@ import com.demo.dynamodb.entities.user.User;
 import com.demo.dynamodb.mappers.UserMapper;
 import com.demo.dynamodb.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class UserService {
 
 	private final UserMapper userMapper;
 
-	public List<UserGetDto> list() {
-		List<User> users = userRepository.findAll();
+	public List<UserGetDto> list(Integer page, Integer size) {
+		Page<User> users = userRepository.findAll(PageRequest.of(page, size));
 		List<UserGetDto> userGetDtos = users.stream()
 				.map(userMapper::fromEntity)
 				.collect(Collectors.toList());
