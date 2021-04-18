@@ -31,16 +31,16 @@ public class UserController {
 		return savedUser;
 	}
 
-	//@GetMapping("/companyId")
-	//public List<UserGetDto> findByCompanyId(@RequestParam String companyId) {
-	//	List<UserGetDto> users = userService.findByCompanyId(companyId);
-	//	return users;
-	//}
+	@GetMapping("/companyId")
+	public List<UserGetDto> findByCompanyId(@RequestParam String companyId) {
+		List<UserGetDto> users = userService.findByCompanyId(companyId);
+		return users;
+	}
 
 	// Example: api/v1/users/role?role=intern
-	//@GetMapping("/role")
-	//public List<UserGetDto> findByRole(@RequestParam String role) {
-	//	List<UserGetDto> users = userService.findByRole(Role.valueOf(role.toUpperCase()));
-	//	return users;
-	//}
+	@GetMapping("/role")
+	public List<UserGetDto> findByRole(@RequestParam String role) {
+		List<UserGetDto> users = userService.findByRole(Role.valueOf(role.toUpperCase()));
+		return users;
+	}
 }

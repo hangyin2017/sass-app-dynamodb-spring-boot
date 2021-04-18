@@ -17,11 +17,10 @@ import java.util.List;
 @EnableScan
 @EnableScanCount
 public interface UserRepository
-		//extends CrudRepository<User, UserId>,
-				//MyUserRepository {
-	extends PagingAndSortingRepository<User, UserId> {
+		extends CrudRepository<User, UserId>,
+				MyUserRepository {
 
 	Page<User> findAll(Pageable pageable);
 
-	//List<User> findByRole(Role role);
+	List<User> findByRole(Role role);
 }
