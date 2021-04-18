@@ -76,9 +76,6 @@ public class DynamoDBConfig {
 		// Inject the table name overrider bean
 		builder.withTableNameOverride(tableNameOverrider());
 
-		// Enable iteration loading to allow pagination.
-		builder.setPaginationLoadingStrategy(DynamoDBMapperConfig.PaginationLoadingStrategy.ITERATION_ONLY);
-
 		return builder.build();
 	}
 

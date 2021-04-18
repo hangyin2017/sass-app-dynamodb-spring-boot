@@ -39,9 +39,6 @@ public class UserService {
 		user.setRole(roleSet.stream()
 				.map(Role::toString)
 				.collect(Collectors.toSet()));
-		Date now = new Date();
-		user.setCreatedAt(now);
-		user.setUpdatedAt(now);
 
 		User savedUser = userRepository.save(user);
 		return userMapper.fromEntity(savedUser);
