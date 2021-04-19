@@ -2,6 +2,7 @@ package com.demo.dynamodb.mappers;
 
 import com.demo.dynamodb.dtos.user.UserGetDto;
 import com.demo.dynamodb.dtos.user.UserPostDto;
+import com.demo.dynamodb.dtos.user.UserPutDto;
 import com.demo.dynamodb.entities.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -14,5 +15,5 @@ public interface UserMapper {
 
 	UserGetDto fromEntity(User user);
 
-	void copy(UserPostDto userPutDto, @MappingTarget User user);
+	void copy(UserPutDto userPutDto, @MappingTarget User user);
 }

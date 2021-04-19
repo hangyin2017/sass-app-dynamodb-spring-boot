@@ -3,7 +3,9 @@ package com.demo.dynamodb.services;
 import com.demo.dynamodb.constants.Role;
 import com.demo.dynamodb.dtos.user.UserGetDto;
 import com.demo.dynamodb.dtos.user.UserPostDto;
+import com.demo.dynamodb.dtos.user.UserPutDto;
 import com.demo.dynamodb.entities.user.User;
+import com.demo.dynamodb.entities.user.UserId;
 import com.demo.dynamodb.mappers.UserMapper;
 import com.demo.dynamodb.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,10 +38,7 @@ public class UserService {
 	public UserGetDto addOne(UserPostDto userPostDto) {
 		User user = userMapper.toEntity(userPostDto);
 		user.setIsVerified(false);
-		Set<Role> roleSet = userPostDto.getRole();
-		user.setRole(roleSet.stream()
-				.map(Role::toString)
-				.collect(Collectors.toSet()));
+		user.setRole(convertRoles(userPostDto.getRole()));
 
 		User savedUser = userRepository.save(user);
 		return userMapper.fromEntity(savedUser);
@@ -52,5 +52,18 @@ public class UserService {
 	public List<UserGetDto> findByCompanyId(String companyId) {
 		List<User> users = userRepository.findByCompanyId(companyId);
 		return users.stream().map(userMapper::fromEntity).collect(Collectors.toList());
+	}
+
+	public UserGetDto update(UserPutDto userPutDto) throws NoSuchElementException {
+		User user = userRepository.findById(new UserId(userPutDto.getUserId(), userPutDto.getCreatedAt()))
+				.orElseThrow(() -> new NoSuchElementException("No such user"));
+		userMapper.copy(userPutDto, user);
+		user.setRole(convertRoles(userPutDto.getRole()));
+		return userMapper.fromEntity(userRepository.save(user));
+	}
+
+	// Converts role enums to lowercase
+	private Set<String> convertRoles(Set<Role> roleSet) {
+		return roleSet.stream().map(Role::toString).collect(Collectors.toSet());
 	}
 }

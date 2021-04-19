@@ -3,6 +3,7 @@ package com.demo.dynamodb.controllers;
 import com.demo.dynamodb.constants.Role;
 import com.demo.dynamodb.dtos.user.UserGetDto;
 import com.demo.dynamodb.dtos.user.UserPostDto;
+import com.demo.dynamodb.dtos.user.UserPutDto;
 import com.demo.dynamodb.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +43,10 @@ public class UserController {
 	public List<UserGetDto> findByRole(@RequestParam String role) {
 		List<UserGetDto> users = userService.findByRole(Role.valueOf(role.toUpperCase()));
 		return users;
+	}
+
+	@PutMapping
+	public UserGetDto update(@RequestBody @Valid UserPutDto userPutDto) {
+		return userService.update(userPutDto);
 	}
 }
