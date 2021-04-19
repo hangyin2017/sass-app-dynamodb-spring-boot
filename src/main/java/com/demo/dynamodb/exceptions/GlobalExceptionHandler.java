@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolationException;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -33,6 +34,12 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(ConstraintViolationException.class)
 	public String handleConstraintViolationException(ConstraintViolationException e) {
 		return e.getConstraintViolations().iterator().next().getMessage();
+	}
+
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(NoSuchElementException.class)
+	public String handleNotFoundException(Exception e) {
+		return e.getMessage();
 	}
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
