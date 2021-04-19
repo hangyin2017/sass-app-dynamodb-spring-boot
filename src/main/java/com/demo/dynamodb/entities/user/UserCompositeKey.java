@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserId implements Serializable {
+public class UserCompositeKey implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@DynamoDBHashKey(attributeName = "userId")

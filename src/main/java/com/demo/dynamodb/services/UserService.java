@@ -5,7 +5,7 @@ import com.demo.dynamodb.dtos.user.UserGetDto;
 import com.demo.dynamodb.dtos.user.UserPostDto;
 import com.demo.dynamodb.dtos.user.UserPutDto;
 import com.demo.dynamodb.entities.user.User;
-import com.demo.dynamodb.entities.user.UserId;
+import com.demo.dynamodb.entities.user.UserCompositeKey;
 import com.demo.dynamodb.mappers.UserMapper;
 import com.demo.dynamodb.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -55,7 +54,7 @@ public class UserService {
 	}
 
 	public UserGetDto update(UserPutDto userPutDto) throws NoSuchElementException {
-		User user = userRepository.findById(new UserId(userPutDto.getUserId(), userPutDto.getCreatedAt()))
+		User user = userRepository.findById(new UserCompositeKey(userPutDto.getUserId(), userPutDto.getCreatedAt()))
 				.orElseThrow(() -> new NoSuchElementException("No such user"));
 		userMapper.copy(userPutDto, user);
 		user.setRole(convertRoles(userPutDto.getRole()));

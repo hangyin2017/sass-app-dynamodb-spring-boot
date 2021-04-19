@@ -2,7 +2,7 @@ package com.demo.dynamodb.repositories;
 
 import com.demo.dynamodb.constants.Role;
 import com.demo.dynamodb.entities.user.User;
-import com.demo.dynamodb.entities.user.UserId;
+import com.demo.dynamodb.entities.user.UserCompositeKey;
 import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.socialsignin.spring.data.dynamodb.repository.EnableScanCount;
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ import java.util.List;
 @EnableScan
 @EnableScanCount
 public interface UserRepository
-		extends PagingAndSortingRepository<User, UserId>,
+		extends PagingAndSortingRepository<User, UserCompositeKey>,
 				MyUserRepository {
 
 	Page<User> findAll(Pageable pageable);
