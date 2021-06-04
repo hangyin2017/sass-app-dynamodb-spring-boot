@@ -5,7 +5,6 @@ import com.demo.dynamodb.dtos.user.UserGetDto;
 import com.demo.dynamodb.dtos.user.UserPostDto;
 import com.demo.dynamodb.dtos.user.UserPutDto;
 import com.demo.dynamodb.entities.user.User;
-import com.demo.dynamodb.entities.user.UserCompositeKey;
 import com.demo.dynamodb.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

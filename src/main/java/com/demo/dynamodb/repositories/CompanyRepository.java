@@ -11,7 +11,7 @@ import java.util.List;
 @EnableScan
 public interface CompanyRepository
 		extends CrudRepository<Company, String>,
-				MyCompanyRepository {
+		CompanyCustomRepository {
 
 	List<Company> findAll();
 }

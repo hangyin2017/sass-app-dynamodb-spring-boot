@@ -5,7 +5,7 @@ import com.demo.dynamodb.entities.user.User;
 
 import java.util.List;
 
-public interface MyUserRepository {
+public interface UserCustomRepository {
 
 	List<User> findByRole(Role role);
 

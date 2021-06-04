@@ -5,7 +5,6 @@ import com.demo.dynamodb.dtos.user.UserGetDto;
 import com.demo.dynamodb.dtos.user.UserPostDto;
 import com.demo.dynamodb.dtos.user.UserPutDto;
 import com.demo.dynamodb.entities.user.User;
-import com.demo.dynamodb.entities.user.UserCompositeKey;
 import com.demo.dynamodb.mappers.UserMapper;
 import com.demo.dynamodb.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;

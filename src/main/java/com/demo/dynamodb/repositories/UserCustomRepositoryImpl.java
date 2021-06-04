@@ -11,17 +11,17 @@ import java.util.HashMap;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class MyUserRepositoryImpl implements MyUserRepository {
+public class UserCustomRepositoryImpl implements UserCustomRepository {
 
 	private final DynamoDBTemplate dynamoDBTemplate;
 
 	@Override
 	public List<User> findByRole(Role role) {
-		HashMap<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+		HashMap<String, AttributeValue> eav = new HashMap<>();
 		eav.put(":v1", new AttributeValue().withS(role.toString()));
 
 		// To resolve the conflict with reserved keyword 'role'.
-		HashMap<String, String> ean = new HashMap<String, String>();
+		HashMap<String, String> ean = new HashMap<>();
 		ean.put("#role", "role");
 
 		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
@@ -29,20 +29,18 @@ public class MyUserRepositoryImpl implements MyUserRepository {
 				.withExpressionAttributeValues(eav)
 				.withExpressionAttributeNames(ean);
 
-		List<User> users =  dynamoDBTemplate.scan(User.class, scanExpression);
-		return users;
+		return dynamoDBTemplate.scan(User.class, scanExpression);
 	}
 
 	@Override
 	public List<User> findByCompanyId(String companyId) {
-		HashMap<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+		HashMap<String, AttributeValue> eav = new HashMap<>();
 		eav.put(":v1", new AttributeValue().withS(companyId));
 
 		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
 				.withFilterExpression("companyId=:v1")
 				.withExpressionAttributeValues(eav);
 
-		List<User> users =  dynamoDBTemplate.scan(User.class, scanExpression);
-		return users;
+		return dynamoDBTemplate.scan(User.class, scanExpression);
 	}
 }
