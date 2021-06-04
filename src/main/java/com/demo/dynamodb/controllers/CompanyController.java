@@ -18,13 +18,11 @@ public class CompanyController {
 
 	@GetMapping
 	public List<CompanyGetDto> list() {
-		List<CompanyGetDto> companyList = companyService.list();
-		return companyList;
+		return companyService.list();
 	}
 
 	@PostMapping
 	public CompanyGetDto addOne(@RequestBody @Valid CompanyPostDto companyPostDto) {
-		CompanyGetDto savedCompany = companyService.addOne(companyPostDto);
-		return savedCompany;
+		return companyService.addOne(companyPostDto);
 	}
 }

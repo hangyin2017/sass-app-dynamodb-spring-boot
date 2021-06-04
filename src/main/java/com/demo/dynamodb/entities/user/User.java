@@ -28,7 +28,7 @@ public class User {
 	@DynamoDBAttribute(attributeName = "email")
 	private String email;
 
-	@DynamoDBAttribute(attributeName = "verified")
+	@DynamoDBAttribute(attributeName = "isVerified")
 	private Boolean isVerified;
 
 	@DynamoDBAttribute(attributeName = "role")

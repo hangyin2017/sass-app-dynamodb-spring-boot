@@ -1,0 +1,6 @@
+aws:
+    dynamodb:
+        region: localhost
+        endpoint: http://localhost:8101/
+        accesskey: fakeKey
+        secretkey: fakeKey2
