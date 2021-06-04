@@ -11,6 +11,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @EnableScan
@@ -20,6 +21,8 @@ public interface UserRepository
 				MyUserRepository {
 
 	Page<User> findAll(Pageable pageable);
+
+	Optional<User> findByUserId(String userId);
 
 	List<User> findByRole(Role role);
 }

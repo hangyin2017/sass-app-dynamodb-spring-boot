@@ -10,7 +10,6 @@ import com.demo.dynamodb.mappers.UserMapper;
 import com.demo.dynamodb.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +28,9 @@ public class UserService {
 
 	public List<UserGetDto> list(Pageable pageRequest) {
 		Page<User> users = userRepository.findAll(pageRequest);
-		List<UserGetDto> userGetDtos = users.stream()
+		return users.stream()
 				.map(userMapper::fromEntity)
 				.collect(Collectors.toList());
-		return userGetDtos;
 	}
 
 	public UserGetDto addOne(UserPostDto userPostDto) {
@@ -55,14 +53,21 @@ public class UserService {
 	}
 
 	public UserGetDto update(UserPutDto userPutDto) throws NoSuchElementException {
-		User user = userRepository.findById(new UserCompositeKey(userPutDto.getUserId(), userPutDto.getCreatedAt()))
+		User user = userRepository.findByUserId(userPutDto.getUserId())
 				.orElseThrow(() -> new NoSuchElementException("No such user"));
 		userMapper.copy(userPutDto, user);
-		user.setRole(convertRoles(userPutDto.getRole()));
+		Set<Role> roleSet = userPutDto.getRole();
+		if (roleSet != null) {
+			user.setRole(convertRoles(roleSet));
+		}
 		return userMapper.fromEntity(userRepository.save(user));
 	}
 
-	// Converts role enums to lowercase
+	/**
+	 * Converts role enums to lowercase
+	 * @param roleSet Not null.
+	 * @return Role set string in lowercase.
+	 */
 	private Set<String> convertRoles(Set<Role> roleSet) {
 		return roleSet.stream().map(Role::toString).collect(Collectors.toSet());
 	}

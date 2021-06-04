@@ -12,7 +12,6 @@ import java.util.Set;
 public class UserPutDto {
 
 	@NotBlank String userId;
-	@Past Date createdAt;
 	String username;
 	String email;
 	Set<Role> role;
