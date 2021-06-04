@@ -1,8 +1,8 @@
 package com.demo.dynamodb.controllers;
 
+import com.demo.dynamodb.constants.Role;
 import com.demo.dynamodb.dtos.company.CompanyGetDto;
 import com.demo.dynamodb.dtos.company.CompanyPostDto;
-import com.demo.dynamodb.entities.company.Company;
 import com.demo.dynamodb.services.CompanyService;
 import com.demo.dynamodb.utils.TestHelper;
 import org.hamcrest.Matchers;
@@ -19,6 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;

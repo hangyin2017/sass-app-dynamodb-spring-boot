@@ -6,6 +6,8 @@ import com.demo.dynamodb.dtos.user.UserPostDto;
 import com.demo.dynamodb.dtos.user.UserPutDto;
 import com.demo.dynamodb.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,8 +21,8 @@ public class UserController {
 	private final UserService userService;
 
 	@GetMapping
-	public List<UserGetDto> list(@RequestParam Integer page, @RequestParam Integer size) {
-		return userService.list(page, size);
+	public List<UserGetDto> list(@PageableDefault(page = 0, size = 20) Pageable pageRequest) {
+		return userService.list(pageRequest);
 	}
 
 	// Note: Role is lower-case
@@ -29,7 +31,7 @@ public class UserController {
 		return userService.addOne(userPostDto);
 	}
 
-	@GetMapping("/companyId")
+	@GetMapping("/company")
 	public List<UserGetDto> findByCompanyId(@RequestParam String companyId) {
 		return userService.findByCompanyId(companyId);
 	}

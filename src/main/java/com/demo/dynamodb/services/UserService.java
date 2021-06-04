@@ -11,6 +11,7 @@ import com.demo.dynamodb.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +27,8 @@ public class UserService {
 
 	private final UserMapper userMapper;
 
-	public List<UserGetDto> list(Integer page, Integer size) {
-		Page<User> users = userRepository.findAll(PageRequest.of(page, size));
+	public List<UserGetDto> list(Pageable pageRequest) {
+		Page<User> users = userRepository.findAll(pageRequest);
 		List<UserGetDto> userGetDtos = users.stream()
 				.map(userMapper::fromEntity)
 				.collect(Collectors.toList());
